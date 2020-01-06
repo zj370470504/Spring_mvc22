@@ -41,11 +41,11 @@ public class ServerTest {
             //3秒内没有的话，直接continue
             if (selector.select(3000) == 0)
                 continue;
-        //7、遍历取出池子里面的socket
+            //7、遍历取出池子里面的socket
             Iterator<SelectionKey> keyIterator = selector.selectedKeys().iterator();
             while (keyIterator.hasNext()){
                 SelectionKey key = keyIterator.next();
-        //8、处理这个socket
+                //8、处理这个socket
                 httphandle(key);
                 keyIterator.remove();
             }
@@ -112,11 +112,11 @@ public class ServerTest {
                 Class<?> aClass = Class.forName(className);
                 MyRestController myRestController = aClass.getAnnotation(MyRestController.class);
 //                System.out.println(myRestController);
-                  if (myRestController == null) {
-                      System.out.println("没有这个注解");
-                  }else
-                      //终于得到了这个这个类的字节码文件了。。。。。。。。处理
-                      controllerParse(aClass);
+                if (myRestController == null) {
+                    System.out.println("没有这个注解");
+                }else
+                    //终于得到了这个这个类的字节码文件了。。。。。。。。处理
+                    controllerParse(aClass);
             } catch (Exception e) {
                 e.printStackTrace();
             }
